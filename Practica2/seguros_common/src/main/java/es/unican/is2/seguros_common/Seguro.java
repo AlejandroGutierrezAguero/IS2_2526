@@ -116,7 +116,50 @@ public class Seguro {
 	 *         0 si el seguro todavía no está en vigor (no se ha alcanzado su fecha de inicio)
      */
 	public double precio() {
-		return 0;
+		if (LocalDate.now().isBefore(fechaInicio)){
+			return 0.0;
+		}
+		
+		double precio = 0.0;
+		switch (cobertura){
+			case TODO_RIESGO:
+				precio = 1000.0;
+				break;
+			case TERCEROS_LUNAS:
+				precio = 600.0;
+				break;
+			case TERCEROS:
+				precio = 400.0;
+				break;
+		}
+
+		if (potencia >= 90 && potencia <= 110){
+			precio = precio * 1.05;
+		} else if (potencia > 110){
+			precio = precio * 1.20;
+		}
+
+		if (LocalDate.now().isBefore(fechaInicio.plusYears(1))){
+			precio = precio * 0.8;
+		}
+		return precio;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Seguro other = (Seguro) obj;
+		if (matricula == null) {
+			if (other.matricula != null)
+				return false;
+		} else if (!matricula.equals(other.matricula))
+			return false;
+		return true;
 	}
 	
 }
