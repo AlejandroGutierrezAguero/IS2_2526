@@ -16,8 +16,31 @@ public class Cliente {
     private boolean minusvalia;
 
     private List<Seguro> seguros = new LinkedList<Seguro>();
-    
-	/**
+
+    /**
+     * Constructor con parametros del Cliente
+     * @param dni dni del cliente
+     * @param nombre nombre del cliente
+     * @param minusvalia true si el cliente acredita minusvalia, false en caso contrario
+     * @throws DatoNoValidoException si algun dato introducido es incorrecto
+     */
+	public Cliente(String dni, String nombre, boolean minusvalia) throws DatoNoValidoException {
+        if (dni == null || nombre == null) {
+            throw new DatoNoValidoException();
+        }
+        this.dni = dni;
+        this.nombre = nombre;
+        this.minusvalia = minusvalia;
+    }
+
+    /**
+     * Constructor sin parametros del Cliente
+     */
+    public Cliente() {
+
+    }
+
+    /**
      * Retorna los seguros del cliente 
      */
     public List<Seguro> getSeguros() {
@@ -87,6 +110,20 @@ public class Cliente {
             total = total * 0.75;
         }
         return total;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Cliente other = (Cliente) obj;
+        if (!dni.equals(other.dni))
+            return false;
+        return true;
     }
 
 }

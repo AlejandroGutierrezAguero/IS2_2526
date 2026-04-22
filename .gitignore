@@ -44,3 +44,12 @@ build.log
 .settings/
 .factorypath
 bin/
+
+# Reportes de cobertura (Jacoco / Test Runner)
+.jacoco/
+/coverage/
+/site/jacoco/
+
+# Extensiones de VS Code (Java Test Runner)
+.java/
+.test-results/

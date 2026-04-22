@@ -20,6 +20,35 @@ public class Seguro {
 	private String conductorAdicional;
 
 	/**
+	 * Constructor del Seguro con parametros
+	 * @param id id del seguro
+	 * @param matricula matricula del vehiculo asociado al seguro
+	 * @param potencia potencia del vehiculo asociado al seguro
+	 * @param cobertura cobertura del seguro
+	 * @param fechaInicio fecha de inicio del seguro
+	 * @param conductorAdicional conductor adicional asociado al seguro
+	 * @throws DatoNoValidoException si algun dato introducido es incorrecto
+	 */
+	public Seguro (long id, String matricula, int potencia, Cobertura cobertura, LocalDate fechaInicio, String conductorAdicional) throws DatoNoValidoException {
+		if (matricula == null || potencia <= 0 || cobertura == null || fechaInicio == null) {
+			throw new DatoNoValidoException();
+		}
+		this.id = id;
+		this.matricula = matricula;
+		this.potencia = potencia;
+		this.cobertura = cobertura;
+		this.fechaInicio = fechaInicio;
+		this.conductorAdicional = conductorAdicional;
+	}
+
+	/**
+	 * Constructor del Seguro sin parametros
+	 */
+	public Seguro() {
+		
+	}
+
+	/**
 	 * Retorna el identificador del seguro
 	 */
 	public long getId() {
@@ -139,7 +168,7 @@ public class Seguro {
 			precio = precio * 1.20;
 		}
 
-		if (LocalDate.now().isBefore(fechaInicio.plusYears(1))){
+		if (LocalDate.now().isBefore(fechaInicio.plusYears(1).plusDays(1))){
 			precio = precio * 0.8;
 		}
 		return precio;
@@ -154,11 +183,9 @@ public class Seguro {
 		if (getClass() != obj.getClass())
 			return false;
 		Seguro other = (Seguro) obj;
-		if (matricula == null) {
-			if (other.matricula != null)
-				return false;
-		} else if (!matricula.equals(other.matricula))
+		if (!matricula.equals(other.matricula)) {
 			return false;
+		}
 		return true;
 	}
 	
