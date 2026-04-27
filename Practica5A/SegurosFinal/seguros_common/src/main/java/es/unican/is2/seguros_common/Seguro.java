@@ -7,6 +7,15 @@ import java.time.LocalDate;
  */
 public class Seguro {
 	
+	private static final double PRECIO_TODO_RIESGO = 1000.0;
+	private static final double PRECIO_TERCEROS_LUNAS = 600.0;
+	private static final double PRECIO_TERCEROS = 400.0;
+	private static final int LIMITE_INF_POTENCIA_NIVEL1 = 90;
+	private static final int LIMITE_SUP_POTENCIA_NIVEL1 = 110;
+	private static final double MULTIPLICADOR_POTENCIA_NIVEL1 = 1.05;
+	private static final double MULTIPLICADOR_POTENCIA_NIVEL2 = 1.20;
+	private static final double MULTIPLICADOR_PRIMER_ANHO = 0.8;
+
 	private long id;
 
     private String matricula;
@@ -152,24 +161,24 @@ public class Seguro {
 		double precio = 0.0;
 		switch (cobertura){
 			case TODO_RIESGO:
-				precio = 1000.0;
+				precio = PRECIO_TODO_RIESGO;
 				break;
 			case TERCEROS_LUNAS:
-				precio = 600.0;
+				precio = PRECIO_TERCEROS_LUNAS;
 				break;
 			case TERCEROS:
-				precio = 400.0;
+				precio = PRECIO_TERCEROS;
 				break;
 		}
 
-		if (potencia >= 90 && potencia <= 110){
-			precio = precio * 1.05;
-		} else if (potencia > 110){
-			precio = precio * 1.20;
+		if (potencia >= LIMITE_INF_POTENCIA_NIVEL1 && potencia <= LIMITE_SUP_POTENCIA_NIVEL1){
+			precio = precio * MULTIPLICADOR_POTENCIA_NIVEL1;
+		} else if (potencia > LIMITE_SUP_POTENCIA_NIVEL1){
+			precio = precio * MULTIPLICADOR_POTENCIA_NIVEL2;
 		}
 
 		if (LocalDate.now().isBefore(fechaInicio.plusYears(1).plusDays(1))){
-			precio = precio * 0.8;
+			precio = precio * MULTIPLICADOR_PRIMER_ANHO;
 		}
 		return precio;
 	}

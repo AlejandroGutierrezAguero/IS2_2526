@@ -9,6 +9,8 @@ import java.util.List;
  */
 public class Cliente {
 
+    private static final double REDUCCION_MINUSVALIA = 0.75;
+
     private String dni;
 
     private String nombre;  
@@ -107,7 +109,7 @@ public class Cliente {
             total += s.precio();
         }
         if (minusvalia){
-            total = total * 0.75;
+            total = total * REDUCCION_MINUSVALIA;
         }
         return total;
     }
