@@ -56,6 +56,7 @@ public class ConjuntoOrdenadoTest {
 
         sut.add(1);
         assertEquals(1, sut.get(0));
+        assertEquals(1, sut.size()); // Para comprobar que por error el get() no elimina elementos.
 
         sut.add(2);
         sut.add(3);
@@ -68,6 +69,7 @@ public class ConjuntoOrdenadoTest {
         assertThrows(IndexOutOfBoundsException.class, () -> sut.get(-5));
         assertThrows(IndexOutOfBoundsException.class, () -> sut.get(3));
         assertThrows(IndexOutOfBoundsException.class, () -> sut.get(5));
+        assertEquals(3, sut.size()); // Para comprobar que por error el get() no elimina elementos en caso de indice erroneo.
     }
 
     @Test
