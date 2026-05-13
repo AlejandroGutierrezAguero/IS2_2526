@@ -11,7 +11,7 @@ public abstract class Transporte {
 	 * @param horas Horas que ha durado el transporte
 	 */ 
 	public Transporte(double horas) throws IllegalArgumentException { //WMC+1
-		if (horas <= 0) { //WMC+1+1+1 //CCog+1+1
+		if (horas <= 0) { //WMC+1 //CCog+1
 			throw new IllegalArgumentException();
 		}
 		this.horas = horas;
@@ -21,7 +21,7 @@ public abstract class Transporte {
 	 * Calcula el importe extra de un determinado transporte
 	 * @return importe extra de un determinado transporte
 	 */
-	public double getExtra() {
+	public double getExtra() { //WMC+1
 		return EXTRA_BASE_POR_HORA * horas;
 	}
 	

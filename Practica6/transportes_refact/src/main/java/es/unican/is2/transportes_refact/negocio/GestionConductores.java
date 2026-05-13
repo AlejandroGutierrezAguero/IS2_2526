@@ -44,11 +44,11 @@ public class GestionConductores {
 	 * Obtiene el/los mejor(es) conductor(es), es decir, el/los que tiene(n) el sueldo mas alto
 	 * @return el/los mejor(es) conductor(es)
 	 */
-	public List<Conductor> mejorConductor() {
+	public List<Conductor> mejorConductor() { //WMC+1
 		List<Conductor> resultado = new LinkedList<Conductor>();
 		double maxSueldo = 0.0;
-		for (Conductor c : conductores) { //WMC+1 //CCog+1+1+1
-			if (c.sueldo() > maxSueldo) { //WMC+1 //CCog+1+1+1+1
+		for (Conductor c : conductores) { //WMC+1 //CCog+1
+			if (c.sueldo() > maxSueldo) { //WMC+1 //CCog+1+1
 				maxSueldo = c.sueldo();
 				resultado.clear();
 				resultado.add(c);

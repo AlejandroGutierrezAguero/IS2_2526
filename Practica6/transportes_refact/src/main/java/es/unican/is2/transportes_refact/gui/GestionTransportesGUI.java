@@ -15,6 +15,9 @@ import fundamentos.*;
  */
 public class GestionTransportesGUI {
 
+	// empresa de transportes
+	private static GestionConductores gestionConductores;
+
 	/**
 	 * Programa principal basado en menu
 	 */
@@ -24,7 +27,7 @@ public class GestionTransportesGUI {
 		SUELDO_CONDUCTOR = 2, MEJOR_CONDUCTOR = 3;
 
 		// crea la empresa de transportes
-		GestionConductores gestionConductores = new GestionConductores();
+		gestionConductores = new GestionConductores();
 		
 		// crea la ventana de menu
 		Menu menu = new Menu("Transportes");
@@ -42,19 +45,19 @@ public class GestionTransportesGUI {
 			// realiza las acciones dependiendo de la opcion elegida
 			switch (opcion) { //CCog+1+1
 			case  ANHADE_CONDUCTOR: //WMC+1
-				anhadeConductor(gestionConductores);
+				anhadeConductor();
 				break;
 
 			case ANHADE_TRANSPORTE: //WMC+1
-				anhadeTransporte(gestionConductores);
+				anhadeTransporte();
 				break;
 				
 			case SUELDO_CONDUCTOR: //WMC+1
-				sueldoConductor(gestionConductores);
+				sueldoConductor();
  				break;
 
 			case MEJOR_CONDUCTOR: //WMC+1
-				mejorConductor(gestionConductores);
+				mejorConductor();
 				break;
 			}
 		}
@@ -64,13 +67,13 @@ public class GestionTransportesGUI {
 	 * Muestra el/los mejor(es) conductores, es decir el/los que tiene(n) el sueldo mas alto
 	 * @param gestionConductores Gestor de los conductores de la empresa
 	 */
-	private static void mejorConductor(GestionConductores gestionConductores) {
+	private static void mejorConductor() { //WMC+1
 		List<Conductor> resultado = gestionConductores.mejorConductor();	
 		String msj = "";
-		if (resultado.size() == 0) { //WMC+1 //CCog+1+1+1
+		if (resultado.size() == 0) { //WMC+1 //CCog+1
 			msj = "No hay conductores";
 		} else { //CCog+1
-			for (Conductor conductor : resultado) { //WMC+1 //CCog+1+1+1+1
+			for (Conductor conductor : resultado) { //WMC+1 //CCog+1+1
 				msj += conductor.getNombre() + " "+conductor.sueldo()+"\n";
 			}
 		}
@@ -81,13 +84,13 @@ public class GestionTransportesGUI {
 	 * Muestra el sueldo de un conductor con dni dado
 	 * @param gestionConductores Gestor de los conductores de la empresa
 	 */
-	private static void sueldoConductor(GestionConductores gestionConductores) {
+	private static void sueldoConductor() { //WMC+1
 		Lectura lectura = new Lectura("Transportes Peligrosos");
 		lectura.creaEntrada("DNI", "");
 		lectura.esperaYCierra();
 		String dni = lectura.leeString("DNI");
 		Conductor conductor = gestionConductores.buscaConductor(dni);
-		if (conductor!=null){ //WMC+1 //CCog+1+1+1
+		if (conductor!=null){ //WMC+1 //CCog+1
 			mensaje("Sueldo", "El sueldo del conductor es: "+conductor.sueldo());
 		} else { //CCog+1
 			mensaje("ERROR", "No existe un conductor con DNI "+dni);
@@ -98,7 +101,7 @@ public class GestionTransportesGUI {
 	 * Anhade un transporte a un conductor con dni dado
 	 * @param gestionConductores Gestor de los conductores de la empresa
 	 */
-	private static void anhadeTransporte(GestionConductores gestionConductores) {
+	private static void anhadeTransporte() { //WMC+1
 		Lectura lectura = new Lectura("Nuevo transporte");
 		lectura.creaEntrada("DNI", "");
 		lectura.creaEntrada("Tipo Transporte: P | M | MP", "");
@@ -114,8 +117,8 @@ public class GestionTransportesGUI {
 
 		Transporte transporte = null;
 		Conductor conductor = gestionConductores.buscaConductor(dni);
-		if (conductor!=null) { //WMC+1 //CCog+1+1+1
-			switch (tipo) { //CCog+1+1+1+1
+		if (conductor!=null) { //WMC+1 //CCog+1
+			switch (tipo) { //CCog+1+1
 				case "P": //WMC+1
 					transporte = new TransportePersonas(horas, personas);
 					break;
@@ -136,7 +139,7 @@ public class GestionTransportesGUI {
 	 * Anhade un nuevo conductor a la empresa
 	 * @param gestionConductores Gestor de los conductores de la empresa
 	 */
-	private static void anhadeConductor(GestionConductores gestionConductores) {
+	private static void anhadeConductor() { //WMC+1
 		Lectura lectura = new Lectura("Datos Conductor");
 		lectura.creaEntrada("DNI", "");
 		lectura.creaEntrada("Nombre","");
@@ -150,7 +153,7 @@ public class GestionTransportesGUI {
 		String apellido2 = lectura.leeString("Apellido2");
 		String direccion = lectura.leeString("Direccion");
 		// Anhade el conductor
-		if (!gestionConductores.anhadeConductor(new Conductor (dni, nombre, apellido1, apellido2, direccion))) //WMC+1 //CCog+1+1+1
+		if (!gestionConductores.anhadeConductor(new Conductor (dni, nombre, apellido1, apellido2, direccion))) //WMC+1 //CCog+1
 			mensaje("ERROR", "Ya existe un conductor con DNI "+dni);
 	}
 

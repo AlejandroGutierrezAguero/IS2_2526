@@ -19,7 +19,7 @@ public class TransporteMercanciasPeligrosas extends TransporteMercancias {
 	 * Calcula el importe extra de un determinado transporte de mercancias peligrosas
 	 * @return importe extra de un determinado transporte de mercancias peligrosas
 	 */
-	public double getExtra() {
+	public double getExtra() { //WMC+1
 		return super.getExtra() +  EXTRA_POR_TRANSPORTE_MERCANCIAS_PELIGROSAS;
 	}
 }

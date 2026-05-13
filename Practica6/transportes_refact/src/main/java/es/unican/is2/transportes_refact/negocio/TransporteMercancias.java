@@ -14,7 +14,7 @@ public class TransporteMercancias extends Transporte {
 	 */
 	public TransporteMercancias(double horas, int toneladas) throws IllegalArgumentException { //WMC+1
 		super (horas);
-		if (toneladas <= 0) { //WMC+1+1+1 //CCog+1+1
+		if (toneladas <= 0) { //WMC+1 //CCog+1
 			throw new IllegalArgumentException();
 		}
 		this.toneladas = toneladas;
@@ -24,11 +24,11 @@ public class TransporteMercancias extends Transporte {
 	 * Calcula el importe extra de un determinado transporte de mercancias
 	 * @return importe extra de un determinado transporte de mercancias
 	 */
-	public double getExtra() {
+	public double getExtra() { //WMC+1
 		return super.getExtra() +  (toneladas * EXTRA_POR_TONELADA);
 	}
 	
-	public int getToneladas() {
+	public int getToneladas() { //WMC+1
 		return toneladas;
 	}
 }
